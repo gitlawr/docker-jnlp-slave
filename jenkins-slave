@@ -93,6 +93,13 @@ else
 		esac
 	fi
 
+	# add trusted ca certificates
+	if [ "$CA_CERTIFICATES" ]; then
+		CERT_PATH=/home/jenkins/ca.crt
+		printf "%s" "$CA_CERTIFICATES" > $CERT_PATH
+		export GIT_SSL_CAINFO=$CERT_PATH
+	fi
+
 	#TODO: Handle the case when the command-line and Environment variable contain different values.
 	#It is fine it blows up for now since it should lead to an error anyway.
 
